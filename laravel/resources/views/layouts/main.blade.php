@@ -16,7 +16,11 @@
     <title>Shop</title>
 </head>
 <body>
-    <!-- Main content -->
-    @yield('content')
+    <!-- Navigation bar -->
+    @include('layouts.navigation')
+    <div class="container">
+        <!-- Main content -->
+        @yield('content')
+    </div>
 </body>
 </html>
