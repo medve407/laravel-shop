@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class UserController extends Controller
         ]);
         // If the user can log in
         if ( Auth::attempt([ 'username' => $request->input('username'), 'password' => $request->input('password')] )) {
-            // Redirect to the index page if the user is logged in.
+            session('kosar.items');
+            // Redirect to the index page if the user is logged in .
             return redirect('/')->with(['message' => 'Welcome back!']);
         } else {
             // If it is not successful, then redirect back with a message to the login site.
@@ -70,5 +72,28 @@ class UserController extends Controller
         $user->save();
         // Redirect the user to the cart page.
         $request->back();
+    }
+    /**
+     * It return for the user what does he/she has in his/her cart.
+     */
+    public function getCart(){
+        // If the user is logged in!
+        if(Auth::check())
+            return view('cart.index');
+        else
+            // If the user is not logged in, then redirect him/her to the login page.
+            return redirect('/login');
+    }
+    /**
+     * Add a product to the cart
+     * @param
+     */
+    public function addToCart(Request $request){
+        // If the user is logged in.
+        if (Auth::check()) {
+            // Put the item to the kosar session. You should use .items part to make it good.
+            Session::push('kosar.items', $request->id);
+            return response('You have successfully added a product to your cart!');
+        } else { return response('You should log in :)'); }
     }
 }
