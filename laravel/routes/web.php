@@ -25,10 +25,14 @@ Route::get('/', function () { return view('index'); });
  * Return the products layout.
  */
 Route::get('/products',"ProductController@getProducts");
+/*
+ * Return an information about a specific Product by an id.
+ */
+Route::get('/product/{id}',"ProductController@getProduct");
 
 //////////////////////////
 //                      //
-//     USER   PART      //
+//       USER PART      //
 //                      //
 //////////////////////////
 /**
@@ -51,3 +55,17 @@ Route::get('/signup',"UserController@getSignup");
  * Use for send the form data
  */
 Route::post('/signup',"UserController@postSignup");
+
+//////////////////////////
+//                      //
+//       CART PART      //
+//                      //
+//////////////////////////
+/**
+ * Return the cart layout, and all of products what user put the cart.
+ */
+Route::get('/cart',"UserController@getCart");
+/**
+ * Add product to the cart.
+ */
+Route::post('/addToCart',"UserController@addToCart");
