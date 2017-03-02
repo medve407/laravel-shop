@@ -19,6 +19,11 @@
     <!-- Navigation bar -->
     @include('layouts.navigation')
     <div class="container">
+        @if(!empty( session('message') ))
+            <div class="alert alert-info fade out">
+                <p> {{  session('message') }}</p>
+            </div>
+        @endif
         <!-- Main content -->
         @yield('content')
     </div>
