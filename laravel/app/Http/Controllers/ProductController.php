@@ -16,4 +16,14 @@ class ProductController extends Controller
             'products' => Product::all()
         ]);
     }
+
+    /*
+     * Return information about a specific product by an id.
+     */
+    public function getProduct($id){
+        return view('product.index',[
+            // We pass all products what we have.
+            'product' => Product::find($id)
+        ]);
+    }
 }
