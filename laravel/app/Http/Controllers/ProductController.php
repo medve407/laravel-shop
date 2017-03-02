@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function getProduct($id){
         return view('product.index',[
-            // We pass all products what we have.
+            // We pass the product by id.
             'product' => Product::find($id)
         ]);
     }
